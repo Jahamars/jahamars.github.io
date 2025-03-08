@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jahongir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+
+
+        :root {
+            --bg: #282828;
+            --bg1: #3c3836;
+            --fg: #ebdbb2;
+            --red: #cc241d;
+            --green: #98971a;
+            --yellow: #d79921;
+            --blue: #458588;
+            --purple: #b16286;
+            --aqua: #689d6a;
+            --gray: #a89984;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', monospace; 
+            font-size: 11px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .window {
+            background: var(--bg1);
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .titlebar {
+            background: var(--bg);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .title {
+            color: var(--aqua);
+            font-size: 0.9rem;
+        }
+
+        .content {
+            padding: 1rem;
+        }
+
+        .prompt {
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt::before {
+            content: "❯ ";
+            color: var(--yellow);
+        }
+
+        .text {
+            margin-bottom: 1rem;
+        }
+
+        .command {
+            color: var(--purple);
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .skill-level {
+            margin-bottom: 1rem;
+            border-left: 2px solid var(--aqua);
+            padding-left: 1rem;
+        }
+
+        .skill {
+            background: var(--bg);
+            padding: 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid var(--blue);
+        }
+
+        .languages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .language {
+            background: var(--bg);
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--yellow);
+        }
+
+        .interests {
+            margin-top: 1rem;
+        }
+
+        .interest-item {
+            color: var(--aqua);
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- About Window -->
+        <div class="window">
+            <div class="titlebar">
+                <div class="title">about.sh</div>
+            </div>
+            <div class="content">
+                <div class="prompt">cat about.txt</div>
+                <div class="text">
+                          👋<br><br>
+                    <span class="command">Name:</span> Ahmadaliev Jahongir<br>
+                    <span class="command">Age:</span> 19<br>
+                    <span class="command">Location:</span> Tyumen, Russia<br>
+                    <span class="command">Education:</span> Information Security (2nd year)<br>
+                    <span class="command">University:</span> Tyumen State University<br>
+                    <span class="command">Focus:</span> Computer Systems Security<br><br>
+                    
+                    <div class="command">Career Interests:</div>
+                    • Security Engineer<br>
+                    • DevOps Engineer<br>
+                    • System Administrator<br>
+                    • Cloud Engineer<br>
+                    • SRE<br><br>
+                    
+                    <div class="command">Personal Interests:</div>
+                    • Penspinning<br>
+                    • Linux Ricing<br>
+                    • Graffiti<br>
+                    • Quantum Physics
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Window -->
+        <div class="window">
+            <div class="titlebar">
+                <div class="title">skills.sh</div>
+            </div>
+            <div class="content">
+                <div class="prompt">ls -la /usr/skills/</div>
+                
+                <div class="skill-level">
+                    <div class="command">Advanced Level</div>
+                    <div class="skills">
+                        <!--<div class="skill">Unix</div>-->
+                        <div class="skill">Debian</div>
+                        <div class="skill">Ubuntu</div>
+                        <div class="skill">Arch</div>
+                        <div class="skill">Bash</div>
+                        <div class="skill">Systemd</div>
+                        <div class="skill">SSH</div>
+                        <div class="skill">CLI and GNU tools</div>
+                        <div class="skill">Kali Tools</div>
+                        <div class="skill">Git</div>
+                    </div>
+                </div>
+
+                <div class="skill-level">
+                    <div class="command">Intermediate Level</div>
+                    <div class="skills">
+                        <div class="skill">C++</div>
+                        <div class="skill">Python</div>
+                        <div class="skill">Postgre SQL</div>
+                        <div class="skill">Docker</div>
+                        <div class="skill">Networking</div>
+                        <div class="skill">TCP/IP</div>
+                        <div class="skill">Monitoring</div>
+                        <div class="skill">GitHub</div>
+                        <div class="skill">GitLab</div>
+                    </div>
+                </div>
+
+                <div class="skill-level">
+                    <div class="command">Basic Level</div>
+                    <div class="skills">
+                        <div class="skill">GitLab CI</div>
+                        <div class="skill">CI/CD</div>
+                        <!--<div class="skill">Rust</div>-->
+                        <div class="skill">Web Dev</div>
+                    </div>
+                </div>
+
+                <div class="prompt">cat languages.txt</div>
+                <div class="languages">
+                    <div class="language">🇬🇧 English (B2 - Upper Intermediate)</div>
+                    <div class="language">🇷🇺 Russian (Fluent)</div>
+                    <div class="language">🇹🇯 Tajik (Native)</div>
+                    <div class="language">🇺🇿 Uzbek (Native)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Experience -->
+        <div class="window">
+            <div class="titlebar">
+                <div class="title">experience.sh</div>
+            </div>
+            <div class="content">
+                <div class="prompt">cat work_history.txt</div>
+                <div class="text">
+
+                    <span class="command">Current Position</span><br>
+
+                    Developer/Administrator at Pet Projects<br>
+                    March 2024 - Present<br><br>
+                    
+                    <span class="command">Work Preferences</span><br>
+                    • Part-time<br>
+                    • Project-based work<br>
+                    • Internships<br>
+                    • Remote work <br>
+                    • Flexible schedule<br><br>  
+
+                    <span class="command">Sertifications</span> <a href="https://github.com/Jahamars/sert" target="_blank">https://github.com/Jahamars/sert</a><br><br>
+
+                    <span class="command">GitHub:</span> <a href="https://github.com/jahamars" target="_blank">github.com/jahamars</a><br><br>
+                    <span class="command">Blog:</span> <a href="https://mars.mixa.site/" target="_blank">mars.mixa.site</a><br>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Window -->
+        <div class="window">
+            <div class="titlebar">
+                <div class="title">contact.sh</div>
+            </div>
+            <div class="content">
+                <div class="prompt">cat contacts.txt</div>
+                <div class="text">
+                    <span class="command">Telegram:</span> @gruvboxx <br>
+                    <span class="command">Email:</span>jahamarsi@gmail.com<br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function typeWrite(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            const timer = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                }
+            }, speed);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const prompts = document.querySelectorAll('.prompt');
+            prompts.forEach((prompt, index) => {
+                setTimeout(() => {
+                    const text = prompt.textContent;
+                    typeWrite(prompt, text);
+                }, index * 1000);
+            });
+        });
+
+        document.querySelectorAll('.window').forEach(window => {
+            const titlebar = window.querySelector('.titlebar');
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+
+            titlebar.addEventListener('mousedown', e => {
+                isDragging = true;
+                initialX = e.clientX - window.offsetLeft;
+                initialY = e.clientY - window.offsetTop;
+            });
+
+            document.addEventListener('mousemove', e => {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    window.style.position = 'absolute';
+                    window.style.left = `${currentX}px`;
+                    window.style.top = `${currentY}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        });
+    </script>
+</body>
+</html>
