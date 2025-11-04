@@ -9,13 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Jahamars/sert/refs/heads/main/favicon.ico"> -->
-
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
-
 
   <script type="application/ld+json">
   {
@@ -38,13 +34,21 @@
   }
   </script>
 
-
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GN418E58P2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GN418E58P2');
+  </script>
 
   <style>
     :root {
       /* Gruvbox Hard Dark Palette */
       --bg: #1d2021;
       --fg: #fbf1c7;
+      --bg-alt: #282828;
       --red: #fb4934;
       --green: #b8bb26;
       --yellow: #fabd2f;
@@ -52,9 +56,24 @@
       --purple: #d3869b;
       --aqua: #8ec07c;
       --gray: #928374;
+      --border: #504945;
     }
 
-    /* General Reset & Body Styling */
+    [data-theme="light"] {
+      /* Gruvbox Light Palette */
+      --bg: #fbf1c7;
+      --fg: #3c3836;
+      --bg-alt: #f2e5bc;
+      --red: #cc241d;
+      --green: #98971a;
+      --yellow: #d79921;
+      --blue: #458588;
+      --purple: #b16286;
+      --aqua: #689d6a;
+      --gray: #7c6f64;
+      --border: #d5c4a1;
+    }
+
     *, *::before, *::after {
         box-sizing: border-box;
         margin: 0;
@@ -69,99 +88,191 @@
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+      min-height: 100vh;
     }
 
-    /* Container */
     .container {
         max-width: 800px;
         margin: 0 auto;
         padding: 2rem 1.5rem;
     }
 
-    /* Typography */
+    /* Theme & Language Switcher */
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1000;
+      background-color: var(--bg-alt);
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+      background-color: var(--bg);
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.2s ease-in-out;
+      min-width: 60px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:hover {
+      background-color: var(--yellow);
+      color: var(--bg);
+      border-color: var(--yellow);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.active {
+      background-color: var(--aqua);
+      color: var(--bg);
+      border-color: var(--aqua);
+      font-weight: 700;
+    }
+
     h1, h2, h3 {
       line-height: 1.3;
       margin-bottom: 0.75em;
+      font-weight: 700;
     }
     h1 {
       font-size: 2.25rem;
       color: var(--yellow);
       text-align: center;
       margin-bottom: 0.25em;
+      letter-spacing: -0.5px;
     }
     h2 {
       font-size: 1.5rem;
       color: var(--aqua);
-      border-bottom: 2px solid var(--gray);
-      padding-bottom: 0.3em;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.4em;
       margin-top: 2em;
+      letter-spacing: -0.3px;
     }
     h3 {
         font-size: 1.1rem;
         color: var(--green);
         margin-top: 1.5em;
+        font-weight: 600;
     }
     p {
       margin-bottom: 1em;
+      line-height: 1.8;
     }
     a {
       color: var(--blue);
       text-decoration: none;
-      transition: color 0.2s ease-in-out;
+      transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+      position: relative;
     }
     a:hover, a:focus {
       color: var(--red);
+      text-decoration: underline;
+    }
+    a:focus {
+      outline: 2px solid var(--yellow);
+      outline-offset: 2px;
+      border-radius: 2px;
     }
     strong {
         font-weight: 700;
-        color: var(--fg);
+        color: var(--yellow);
     }
 
-    /* Header & Contact Info */
     .header-nav {
         text-align: center;
         margin-bottom: 2.5em;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 0.5rem 1.5rem;
+        gap: 0.75rem 1.5rem;
     }
 
-    /* Sections */
+    .header-nav a {
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+
     .section {
-        margin-bottom: 2em;
+        margin-bottom: 2.5em;
     }
 
-    /* Lists */
     ul {
       list-style-type: none;
     }
     .styled-list li {
         padding-left: 1.5em;
         position: relative;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.65em;
+        line-height: 1.6;
     }
     .styled-list li::before {
-      content: "»";
+      content: ">";
       color: var(--yellow);
       position: absolute;
       left: 0;
+      font-weight: 700;
     }
     .skills-list {
         columns: 2;
+        column-gap: 2rem;
+    }
+    .skills-list li {
+      break-inside: avoid;
     }
     .skills-list li::before {
-      content: "✓";
+      content: "+";
       color: var(--green);
+      font-weight: 700;
     }
 
-    /* Responsive Design */
+    .avatar {
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .avatar img {
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 3px solid var(--aqua);
+      transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .avatar img:hover {
+      transform: scale(1.03);
+      border-color: var(--yellow);
+    }
+
     @media (max-width: 600px) {
       body {
         font-size: 14px;
       }
       .container {
         padding: 1.5rem 1rem;
+        padding-top: 5rem;
       }
       h1 {
         font-size: 1.8rem;
@@ -172,11 +283,62 @@
       .skills-list {
         columns: 1;
       }
+      .controls {
+        top: 0.75rem;
+        right: 0.75rem;
+        gap: 0.4rem;
+        padding: 0.4rem;
+      }
+      .btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.75rem;
+        min-width: 50px;
+      }
+      .avatar img {
+        width: 160px;
+        height: 160px;
+      }
+      .header-nav {
+        gap: 0.5rem 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Loading optimization */
+    .container {
+      will-change: auto;
+    }
+
+    /* Print styles */
+    @media print {
+      .controls {
+        display: none;
+      }
+      body {
+        background-color: white;
+        color: black;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: underline;
+      }
     }
   </style>
 </head>
 <body>
 
+  <div class="controls">
+    <button class="btn" id="themeToggle" aria-label="Toggle theme">DARK</button>
+    <button class="btn active" id="langEn" data-lang="en" aria-label="Switch to English">EN</button>
+    <button class="btn" id="langRu" data-lang="ru" aria-label="Switch to Russian">RU</button>
+  </div>
 
   <div class="container">
     <header>
@@ -185,42 +347,43 @@
         <a href="mailto:jahamarsi@gmail.com">Email</a>
         <a href="https://t.me/gruvboxx" target="_blank" rel="noopener noreferrer">Telegram</a>
         <a href="https://github.com/jahamars/" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://jmee.netlify.app" target="_blank" rel="noopener noreferrer">Blog</a>
-        <a href="https://jahamars.github.io/sert/" target="_blank" rel="noopener noreferrer">Achievements</a>
+        <a href="https://jmee.netlify.app" target="_blank" rel="noopener noreferrer" data-i18n="blog">Blog</a>
+        <a href="https://jahamars.github.io/sert/" target="_blank" rel="noopener noreferrer" data-i18n="achievements">Achievements</a>
       </nav>
     </header>
-    <div style="text-align: center;">
-        <img src="https://avatars.githubusercontent.com/u/146427118?v=4" alt="" style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover;">
+    
+    <div class="avatar">
+        <img src="https://avatars.githubusercontent.com/u/146427118?v=4" alt="Jahongir Ahmadaliev">
     </div>
 
     <main>
       <section class="section" aria-labelledby="career-interests-title">
-        <h2 id="career-interests-title">Career Interests</h2>
+        <h2 id="career-interests-title" data-i18n="careerInterests">Career Interests</h2>
         <ul class="styled-list">
-          <li>Security Engineer</li>
-          <li>DevOps Engineer</li>
-          <li>System Administrator</li>
-          <li>Cloud Engineer</li>
-          <li>Site Reliability Engineer (SRE)</li>
+          <li data-i18n="securityEngineer">Security Engineer</li>
+          <li data-i18n="devopsEngineer">DevOps Engineer</li>
+          <li data-i18n="sysAdmin">System Administrator</li>
+          <li data-i18n="cloudEngineer">Cloud Engineer</li>
+          <li data-i18n="sreEngineer">Site Reliability Engineer (SRE)</li>
         </ul>
       </section>
 
       <section class="section" aria-labelledby="education-title">
-        <h2 id="education-title">Education</h2>
+        <h2 id="education-title" data-i18n="education">Education</h2>
         <p>
-          <strong>Bachelor’s Degree</strong><br>
-          Expected Graduation: 2027<br>
-          University: Tyumen State University<br>
-          Faculty: Mathematics and Computer Science<br>
-          Program: 10.03.01 Information Security<br>
-          Specialization: Computer Systems Security<br>
-          Study Mode: Full-time
+          <strong data-i18n="bachelor">Bachelor's Degree</strong><br>
+          <span data-i18n="expectedGrad">Expected Graduation</span>: 2027<br>
+          <span data-i18n="university">University</span>: <span data-i18n="universityName">Tyumen State University</span><br>
+          <span data-i18n="faculty">Faculty</span>: <span data-i18n="facultyName">Mathematics and Computer Science</span><br>
+          <span data-i18n="program">Program</span>: 10.03.01 <span data-i18n="programName">Information Security</span><br>
+          <span data-i18n="specialization">Specialization</span>: <span data-i18n="specializationName">Computer Systems Security</span><br>
+          <span data-i18n="studyMode">Study Mode</span>: <span data-i18n="fullTime">Full-time</span>
         </p>
       </section>
 
       <section class="section" aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills</h2>
-        <h3>Advanced</h3>
+        <h2 id="skills-title" data-i18n="skills">Skills</h2>
+        <h3 data-i18n="advanced">Advanced</h3>
         <ul class="styled-list skills-list">
           <li>Debian</li>
           <li>Ubuntu</li>
@@ -230,7 +393,7 @@
           <li>Bash</li>
           <li>Git</li>
         </ul>
-        <h3>Intermediate</h3>
+        <h3 data-i18n="intermediate">Intermediate</h3>
         <ul class="styled-list skills-list">
           <li>Python</li>
           <li>C++</li>
@@ -241,7 +404,7 @@
           <li>Nginx</li>
           <li>TCP/IP</li>
         </ul>
-        <h3>Basic</h3>
+        <h3 data-i18n="basic">Basic</h3>
         <ul class="styled-list skills-list">
           <li>CI/CD</li>
           <li>VoIP</li>
@@ -256,34 +419,34 @@
       </section>
 
       <section class="section" aria-labelledby="languages-title">
-        <h2 id="languages-title">Languages</h2>
+        <h2 id="languages-title" data-i18n="languages">Languages</h2>
         <ul class="styled-list">
-          <li>English (B2 - Upper Intermediate)</li>
-          <li>Russian (Fluent)</li>
-          <li>Tajik (Native)</li>
-          <li>Uzbek (Native)</li>
+          <li data-i18n="english">English (B2 - Upper Intermediate)</li>
+          <li data-i18n="russian">Russian (Fluent)</li>
+          <li data-i18n="tajik">Tajik (Native)</li>
+          <li data-i18n="uzbek">Uzbek (Native)</li>
         </ul>
       </section>
 
       <section class="section" aria-labelledby="work-preferences-title">
-        <h2 id="work-preferences-title">Work Preferences</h2>
+        <h2 id="work-preferences-title" data-i18n="workPreferences">Work Preferences</h2>
         <ul class="styled-list">
-          <li>Part-time</li>
-          <li>Project-based work</li>
-          <li>Internships</li>
-          <li>Remote work</li>
-          <li>Flexible schedule</li>
+          <li data-i18n="partTime">Part-time</li>
+          <li data-i18n="projectBased">Project-based work</li>
+          <li data-i18n="internships">Internships</li>
+          <li data-i18n="remote">Remote work</li>
+          <li data-i18n="flexible">Flexible schedule</li>
         </ul>
       </section>
 
       <section class="section" aria-labelledby="links-title">
-        <h2 id="links-title">Links</h2>
+        <h2 id="links-title" data-i18n="links">Links</h2>
         <ul class="styled-list">
             <li><a href="https://openprofile.dev/profile/jahamars" target="_blank" rel="noopener noreferrer">Linux Foundation</a></li>
             <li><a href="https://www.credly.com/users/jahongir/" target="_blank" rel="noopener noreferrer">Credly</a></li>
             <li><a href="https://app.cybrary.it/profile/jahamarsi" target="_blank" rel="noopener noreferrer">Cybrary</a></li>
             <li><a href="https://stepik.org/users/575177703/profile" target="_blank" rel="noopener noreferrer">Stepik</a></li>
-            <li><a href="https://github.com/Jahamars/sert/tree/main/resume" target="_blank" rel="noopener noreferrer">Resume (PDF)</a></li>
+            <li><a href="https://github.com/Jahamars/sert/tree/main/resume" target="_blank" rel="noopener noreferrer" data-i18n="resumePdf">Resume (PDF)</a></li>
             <li><a href="https://codepen.io/jahamarsi" target="_blank" rel="noopener noreferrer">Codepen</a></li>
             <li><a href="https://hub.docker.com/u/jahamars" target="_blank" rel="noopener noreferrer">Docker Hub</a></li>
             <li><a href="https://gitlab.com/jahamarsi1" target="_blank" rel="noopener noreferrer">GitLab</a></li>
@@ -291,8 +454,168 @@
         </ul>
       </section>
     </main>
-
   </div>
+
+  <script>
+    // Translations object
+    const translations = {
+      en: {
+        blog: "Blog",
+        achievements: "Achievements",
+        careerInterests: "Career Interests",
+        securityEngineer: "Security Engineer",
+        devopsEngineer: "DevOps Engineer",
+        sysAdmin: "System Administrator",
+        cloudEngineer: "Cloud Engineer",
+        sreEngineer: "Site Reliability Engineer (SRE)",
+        education: "Education",
+        bachelor: "Bachelor's Degree",
+        expectedGrad: "Expected Graduation",
+        university: "University",
+        universityName: "Tyumen State University",
+        faculty: "Faculty",
+        facultyName: "Mathematics and Computer Science",
+        program: "Program",
+        programName: "Information Security",
+        specialization: "Specialization",
+        specializationName: "Computer Systems Security",
+        studyMode: "Study Mode",
+        fullTime: "Full-time",
+        skills: "Skills",
+        advanced: "Advanced",
+        intermediate: "Intermediate",
+        basic: "Basic",
+        languages: "Languages",
+        english: "English (B2 - Upper Intermediate)",
+        russian: "Russian (Fluent)",
+        tajik: "Tajik (Native)",
+        uzbek: "Uzbek (Native)",
+        workPreferences: "Work Preferences",
+        partTime: "Part-time",
+        projectBased: "Project-based work",
+        internships: "Internships",
+        remote: "Remote work",
+        flexible: "Flexible schedule",
+        links: "Links",
+        resumePdf: "Resume (PDF)"
+      },
+      ru: {
+        blog: "Блог",
+        achievements: "Достижения",
+        careerInterests: "Карьерные интересы",
+        securityEngineer: "Инженер по безопасности",
+        devopsEngineer: "DevOps инженер",
+        sysAdmin: "Системный администратор",
+        cloudEngineer: "Облачный инженер",
+        sreEngineer: "Инженер по надежности (SRE)",
+        education: "Образование",
+        bachelor: "Бакалавриат",
+        expectedGrad: "Ожидаемый год окончания",
+        university: "Университет",
+        universityName: "Тюменский государственный университет",
+        faculty: "Факультет",
+        facultyName: "Математика и компьютерные науки",
+        program: "Направление",
+        programName: "Информационная безопасность",
+        specialization: "Специализация",
+        specializationName: "Безопасность компьютерных систем",
+        studyMode: "Форма обучения",
+        fullTime: "Очная",
+        skills: "Навыки",
+        advanced: "Продвинутый уровень",
+        intermediate: "Средний уровень",
+        basic: "Базовый уровень",
+        languages: "Языки",
+        english: "Английский (B2 - Upper Intermediate)",
+        russian: "Русский (Свободное владение)",
+        tajik: "Таджикский (Родной)",
+        uzbek: "Узбекский (Родной)",
+        workPreferences: "Формат работы",
+        partTime: "Частичная занятость",
+        projectBased: "Проектная работа",
+        internships: "Стажировки",
+        remote: "Удаленная работа",
+        flexible: "Гибкий график",
+        links: "Ссылки",
+        resumePdf: "Резюме (PDF)"
+      }
+    };
+
+    // Cache DOM elements
+    const themeToggle = document.getElementById('themeToggle');
+    const langEn = document.getElementById('langEn');
+    const langRu = document.getElementById('langRu');
+    const html = document.documentElement;
+    const translatableElements = document.querySelectorAll('[data-i18n]');
+    
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const applyTheme = (theme) => {
+      if (theme === 'light') {
+        html.setAttribute('data-theme', 'light');
+        themeToggle.textContent = 'LIGHT/DARK';
+      } else {
+        html.removeAttribute('data-theme');
+        themeToggle.textContent = 'LIGHT/DARK';
+      }
+      localStorage.setItem('theme', theme);
+    };
+
+    // Initialize language
+    const savedLang = localStorage.getItem('lang') || 'en';
+    const applyLanguage = (lang) => {
+      // Update button states
+      langEn.classList.toggle('active', lang === 'en');
+      langRu.classList.toggle('active', lang === 'ru');
+      
+      // Update HTML lang attribute
+      html.setAttribute('lang', lang);
+      
+      // Update all translatable elements efficiently
+      translatableElements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = translations[lang]?.[key];
+        if (translation) {
+          el.textContent = translation;
+        }
+      });
+      
+      localStorage.setItem('lang', lang);
+    };
+
+    // Event listeners
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(newTheme);
+    });
+
+    langEn.addEventListener('click', () => applyLanguage('en'));
+    langRu.addEventListener('click', () => applyLanguage('ru'));
+
+    // Initialize with saved preferences
+    applyTheme(savedTheme);
+    applyLanguage(savedLang);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Alt+T for theme toggle
+      if (e.altKey && e.key === 't') {
+        e.preventDefault();
+        themeToggle.click();
+      }
+      // Alt+E for English
+      if (e.altKey && e.key === 'e') {
+        e.preventDefault();
+        langEn.click();
+      }
+      // Alt+R for Russian
+      if (e.altKey && e.key === 'r') {
+        e.preventDefault();
+        langRu.click();
+      }
+    });
+  </script>
 
 </body>
 </html>
