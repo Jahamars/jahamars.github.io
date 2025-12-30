@@ -66,6 +66,8 @@
       line-height: 1.6;
       overflow-x: hidden;
       transition: background var(--transition), color var(--transition);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* Custom Cursor - Only on desktop */
@@ -128,10 +130,10 @@
       left: 0;
       right: 0;
       z-index: 999;
-      padding: 1rem 2rem;
+      padding: 1rem 1.5rem;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      background: rgba(46, 52, 64, 0.8);
+      background: rgba(46, 52, 64, 0.95);
       border-bottom: 1px solid var(--border);
       transform: translateY(0);
       transition: transform var(--transition), background var(--transition);
@@ -139,7 +141,7 @@
     }
 
     [data-theme="light"] header {
-      background: rgba(236, 239, 244, 0.8);
+      background: rgba(236, 239, 244, 0.95);
     }
 
     header.hidden {
@@ -155,7 +157,7 @@
     }
 
     .logo {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--accent);
       text-decoration: none;
@@ -163,11 +165,12 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      z-index: 1001;
     }
 
     .logo img {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       transition: transform var(--transition);
     }
 
@@ -213,6 +216,7 @@
     .controls {
       display: flex;
       gap: 0.5rem;
+      align-items: center;
     }
 
     .btn {
@@ -228,6 +232,7 @@
       transition: all var(--transition);
       position: relative;
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .btn:hover {
@@ -239,6 +244,23 @@
       background: var(--accent);
       color: var(--bg);
       border-color: var(--accent);
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      z-index: 1001;
+      transition: all var(--transition);
+    }
+
+    .mobile-menu-btn:active {
+      transform: scale(0.95);
     }
 
     /* Hero Section */
@@ -820,6 +842,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      min-height: 70px;
     }
 
     .link-card:hover {
@@ -848,6 +871,7 @@
     .link-arrow {
       color: var(--accent);
       transition: transform var(--transition);
+      flex-shrink: 0;
     }
 
     .link-card:hover .link-arrow {
@@ -911,6 +935,7 @@
       visibility: hidden;
       transition: all var(--transition);
       z-index: 998;
+      box-shadow: 0 4px 12px var(--shadow);
     }
 
     .scroll-top.visible {
@@ -921,16 +946,6 @@
     .scroll-top:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 24px var(--shadow);
-    }
-
-    /* Mobile Menu */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--fg);
-      cursor: pointer;
-      padding: 0.5rem;
     }
 
     /* Loading Animation */
@@ -986,21 +1001,41 @@
       color: var(--bg);
     }
 
-    /* Responsive */
+    /* Responsive Styles */
     @media (max-width: 968px) {
+      /* Hero Responsive */
+      .hero {
+        padding: 6rem 1.5rem 3rem;
+        min-height: auto;
+      }
+
       .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 3rem;
       }
 
       .hero h1 {
         font-size: 2.5rem;
       }
 
+      .hero .subtitle {
+        font-size: 1.3rem;
+      }
+
+      .hero-description {
+        font-size: 0.95rem;
+      }
+
       .hero-buttons {
         justify-content: center;
       }
 
+      .avatar-container {
+        max-width: 280px;
+      }
+
+      /* Timeline Responsive */
       .timeline::before {
         left: 30px;
       }
@@ -1013,14 +1048,19 @@
 
       .timeline-content {
         width: 100%;
-        text-align: left;
-        margin: 0;
+        text-align: left !important;
+        margin: 0 !important;
       }
 
       .timeline-dot {
         left: 30px;
       }
 
+      .timeline-date {
+        justify-content: flex-start;
+      }
+
+      /* Mobile Menu */
       .mobile-menu-btn {
         display: block;
       }
@@ -1031,30 +1071,81 @@
         left: 0;
         right: 0;
         flex-direction: column;
-        background: var(--bg-alt);
+        background: var(--bg);
         padding: 2rem;
         gap: 1rem;
         transform: translateX(-100%);
         transition: transform var(--transition);
         border-bottom: 1px solid var(--border);
+        box-shadow: 0 4px 12px var(--shadow);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
       }
 
       .nav-links.active {
         transform: translateX(0);
       }
 
+      .nav-links a {
+        font-size: 1.1rem;
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Controls in menu */
       .controls {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Skills Grid */
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      /* Languages Grid */
+      .languages-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+
+      /* Preferences Grid */
+      .preferences-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+      }
+
+      .preference-item {
+        padding: 1.25rem;
+      }
+
+      /* Links Grid */
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Section Padding */
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
       }
     }
 
     @media (max-width: 640px) {
-      section {
-        padding: 4rem 1rem;
+      /* Extra small devices */
+      header {
+        padding: 1rem;
       }
 
       .hero {
-        padding: 6rem 1rem 3rem;
+        padding: 5rem 1rem 2rem;
       }
 
       .hero h1 {
@@ -1062,17 +1153,151 @@
       }
 
       .hero .subtitle {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+      }
+
+      .greeting {
+        font-size: 1rem;
       }
 
       .section-title {
-        font-size: 2rem;
+        font-size: 1.75rem;
       }
 
+      section {
+        padding: 3rem 1rem;
+      }
+
+      /* Buttons Full Width */
       .btn-primary,
       .btn-secondary {
         width: 100%;
         justify-content: center;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+      }
+
+      .hero-buttons {
+        width: 100%;
+      }
+
+      /* Cards Padding */
+      .skill-category,
+      .language-card,
+      .link-card {
+        padding: 1.5rem;
+      }
+
+      .timeline-content {
+        padding: 1.5rem;
+      }
+
+      /* Scroll Top Button */
+      .scroll-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+      }
+
+      /* Smaller icons on mobile */
+      .preference-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      /* Footer */
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      /* Touch Targets - increase for better mobile UX */
+      .btn,
+      .mobile-menu-btn,
+      .link-card,
+      .nav-links a {
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+
+      /* Disable hover effects on touch devices */
+      @media (hover: none) {
+        .card:hover,
+        .skill-category:hover,
+        .language-card:hover,
+        .preference-item:hover,
+        .link-card:hover,
+        .timeline-content:hover {
+          transform: none;
+        }
+
+        .avatar:hover {
+          transform: none;
+        }
+      }
+    }
+
+    @media (max-width: 400px) {
+      /* Very small devices */
+      .hero h1 {
+        font-size: 1.75rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .languages-grid,
+      .preferences-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
+    /* Landscape Mobile Optimization */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .hero {
+        min-height: auto;
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .hero-content {
+        gap: 2rem;
+      }
+
+      .avatar-container {
+        max-width: 200px;
+      }
+    }
+
+    /* Disable animations on mobile for better performance */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Performance: Reduce particles on mobile */
+    @media (max-width: 968px) {
+      .particle {
+        display: none;
+      }
+
+      .avatar-bg {
+        animation: none;
       }
     }
   </style>
@@ -1094,9 +1319,10 @@
   <header>
     <div class="header-content">
       <a href="#" class="logo">
-        <img src="./favicon.ico" alt="Logo">
+        <img src="./favicon.ico" alt="Logo" onerror="this.style.display='none'">
       </a>
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
         <i data-lucide="menu"></i>
       </button>
       
@@ -1107,20 +1333,19 @@
           <li><a href="#education" data-i18n="navEducation">Education</a></li>
           <li><a href="#languages" data-i18n="navLanguages">Languages</a></li>
           <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+          <li class="controls">
+            <button class="btn" id="themeToggle" aria-label="Toggle theme">
+              <span id="themeText">LIGHT</span>
+            </button>
+            <button class="btn active" id="langEn" data-lang="en" aria-label="Switch to English">
+              <span>EN</span>
+            </button>
+            <button class="btn" id="langRu" data-lang="ru" aria-label="Switch to Russian">
+              <span>RU</span>
+            </button>
+          </li>
         </ul>
       </nav>
-
-      <div class="controls">
-        <button class="btn" id="themeToggle">
-          <span id="themeText">LIGHT</span>
-        </button>
-        <button class="btn active" id="langEn" data-lang="en">
-          <span>EN</span>
-        </button>
-        <button class="btn" id="langRu" data-lang="ru">
-          <span>RU</span>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -1141,19 +1366,19 @@
         </p>
         
         <div class="hero-buttons">
-          <a href="https://jahongir.ru/" target="_blank" class="btn-secondary">
+          <a href="https://jahongir.ru/" target="_blank" rel="noopener" class="btn-secondary">
             <i data-lucide="home" size="18"></i>
             <span data-i18n="btnHomePage">Home</span>
           </a>
-          <a href="https://github.com/jahamars/" target="_blank" class="btn-secondary">
+          <a href="https://github.com/jahamars/" target="_blank" rel="noopener" class="btn-secondary">
             <i data-lucide="github" size="18"></i>
             <span data-i18n="btnGitHub">GitHub</span>
           </a>
-          <a href="https://t.me/xpltt" target="_blank" class="btn-secondary">
+          <a href="https://t.me/xpltt" target="_blank" rel="noopener" class="btn-secondary">
             <i data-lucide="send" size="18"></i>
             <span data-i18n="btnTelegram">Telegram</span>
           </a>
-          <a href="https://jahongir.ru/sert/" target="_blank" class="btn-secondary">
+          <a href="https://jahongir.ru/sert/" target="_blank" rel="noopener" class="btn-secondary">
             <i data-lucide="award" size="18"></i>
             <span data-i18n="btnAchievements">Achievements</span>
           </a>
@@ -1164,7 +1389,7 @@
         <div class="avatar-container">
           <div class="avatar-bg"></div>
           <div class="avatar">
-            <img src="https://avatars.githubusercontent.com/u/146427118?v=4" alt="Jahongir Ahmadaliev">
+            <img src="https://avatars.githubusercontent.com/u/146427118?v=4" alt="Jahongir Ahmadaliev" loading="lazy">
           </div>
         </div>
       </div>
@@ -1219,7 +1444,6 @@
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
-              <!-- <span class="skill-dot active"></span> -->
               <span class="skill-dot"></span>
             </div>
           </li>
@@ -1288,7 +1512,6 @@
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
-              <!-- <span class="skill-dot active"></span> -->
               <span class="skill-dot"></span>
               <span class="skill-dot"></span>
             </div>
@@ -1327,7 +1550,6 @@
             <div class="skill-level">
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
-              <!-- <span class="skill-dot active"></span> -->
               <span class="skill-dot"></span>
               <span class="skill-dot"></span>
               <span class="skill-dot"></span>
@@ -1338,7 +1560,6 @@
             <div class="skill-level">
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
-              <!-- <span class="skill-dot active"></span> -->
               <span class="skill-dot"></span>
               <span class="skill-dot"></span>
               <span class="skill-dot"></span>
@@ -1351,7 +1572,6 @@
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
               <span class="skill-dot active"></span>
-              <!-- <span class="skill-dot"></span> -->
               <span class="skill-dot"></span>
             </div>
           </li>
@@ -1484,7 +1704,7 @@
     <h2 class="section-title" data-i18n="sectionContact">Get In Touch</h2>
     
     <div class="links-grid">
-      <a href="https://github.com/jahamars/" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://github.com/jahamars/" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="github" size="20"></i>
         </div>
@@ -1492,7 +1712,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://t.me/xpltt" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://t.me/xpltt" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="send" size="20"></i>
         </div>
@@ -1508,7 +1728,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://jahongir.ru/blog/" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://jahongir.ru/blog/" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="newspaper" size="20"></i>
         </div>
@@ -1516,7 +1736,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://openprofile.dev/profile/jahamars" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://openprofile.dev/profile/jahamars" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="layers" size="20"></i>
         </div>
@@ -1524,7 +1744,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://www.credly.com/users/jahongir/" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://www.credly.com/users/jahongir/" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="award" size="20"></i>
         </div>
@@ -1532,7 +1752,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://hub.docker.com/u/jahamars" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://hub.docker.com/u/jahamars" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="container" size="20"></i>
         </div>
@@ -1540,7 +1760,7 @@
         <i data-lucide="arrow-right" size="18" class="link-arrow"></i>
       </a>
       
-      <a href="https://gitlab.com/jahamarsi1" target="_blank" class="link-card animate-on-scroll">
+      <a href="https://gitlab.com/jahamarsi1" target="_blank" rel="noopener" class="link-card animate-on-scroll">
         <div class="link-icon">
           <i data-lucide="gitlab" size="20"></i>
         </div>
@@ -1553,22 +1773,17 @@
   <!-- Footer -->
   <footer>
     <div class="footer-content">
-      <!-- <p class="footer-text" data-i18n="footerText">Built with passion for technology and security</p> -->
       <div class="footer-links">
-        <a href="https://github.com/Jahamars/sert/raw/main/resume/new.pdf" target="_blank" class="footer-link">
+        <a href="https://github.com/Jahamars/sert/raw/main/resume/new.pdf" target="_blank" rel="noopener" class="footer-link">
           <i data-lucide="download" size="16"></i>
           <span data-i18n="footerResume">Download Resume</span>
         </a>
-        <!-- <a href="https://jahongir.ru/sert/" target="_blank" class="footer-link"> -->
-        <!--   <i data-lucide="trophy" size="16"></i> -->
-        <!--   <span data-i18n="footerAchievements">Achievements</span> -->
-        <!-- </a> -->
       </div>
     </div>
   </footer>
 
   <!-- Scroll to Top Button -->
-  <button class="scroll-top" id="scrollTop">
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
     <i data-lucide="arrow-up" size="24"></i>
   </button>
 
@@ -1615,9 +1830,7 @@
         prefFlexible: "Flexible schedule",
         sectionContact: "Get In Touch",
         linkBlog: "Blog",
-        footerText: "Built with passion for technology and security",
-        footerResume: "Download Resume",
-        footerAchievements: "Achievements"
+        footerResume: "Download Resume"
       },
       ru: {
         navAbout: "Обо мне",
@@ -1659,9 +1872,7 @@
         prefFlexible: "Гибкий график",
         sectionContact: "Ссылки",
         linkBlog: "Блог",
-        footerText: "Создано с любовью к технологиям и безопасности",
-        footerResume: "Скачать резюме",
-        footerAchievements: "Достижения"
+        footerResume: "Скачать резюме"
       }
     };
 
@@ -1681,7 +1892,11 @@
     const particles = document.getElementById('particles');
     const typedText = document.getElementById('typedText');
 
-    // Custom Cursor - only on desktop
+    // Detect if mobile
+    const isMobile = window.matchMedia("(max-width: 968px)").matches;
+    const isTouch = 'ontouchstart' in window;
+
+    // Custom Cursor - only on desktop with mouse
     if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       let mouseX = 0;
       let mouseY = 0;
@@ -1735,9 +1950,10 @@
       // Show/Hide Scroll Top Button
       scrollTop.classList.toggle('visible', window.scrollY > 300);
 
-      // Hide/Show Header on Scroll
-      if (window.scrollY > lastScroll && window.scrollY > 100) {
+      // Hide/Show Header on Scroll (only on mobile)
+      if (isMobile && window.scrollY > lastScroll && window.scrollY > 100) {
         header.classList.add('hidden');
+        navLinks.classList.remove('active');
       } else {
         header.classList.remove('hidden');
       }
@@ -1750,7 +1966,7 @@
         window.requestAnimationFrame(updateScrollElements);
         ticking = true;
       }
-    });
+    }, { passive: true });
 
     // Scroll to Top
     scrollTop.addEventListener('click', () => {
@@ -1817,22 +2033,39 @@
       }, 300);
     };
 
-    langEn.addEventListener('click', () => applyLanguage('en'));
-    langRu.addEventListener('click', () => applyLanguage('ru'));
+    langEn.addEventListener('click', () => {
+      applyLanguage('en');
+      if (isMobile) navLinks.classList.remove('active');
+    });
+    
+    langRu.addEventListener('click', () => {
+      applyLanguage('ru');
+      if (isMobile) navLinks.classList.remove('active');
+    });
 
     // Mobile Menu
-    mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       navLinks.classList.toggle('active');
     });
 
     // Close mobile menu on link click
-    navLinks.querySelectorAll('a').forEach(link => {
+    navLinks.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('active');
       });
     });
 
-    // Smooth Scroll for internal links only
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (isMobile && navLinks.classList.contains('active')) {
+        if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+          navLinks.classList.remove('active');
+        }
+      }
+    });
+
+    // Smooth Scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -1847,19 +2080,21 @@
       });
     });
 
-    // Particles - optimized creation
+    // Particles - only on desktop for better performance
     function createParticles() {
-      const fragment = document.createDocumentFragment();
-      for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        fragment.appendChild(particle);
+      if (!isMobile) {
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animationDelay = Math.random() * 20 + 's';
+          particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+          fragment.appendChild(particle);
+        }
+        particles.appendChild(fragment);
       }
-      particles.appendChild(fragment);
     }
     createParticles();
 
@@ -1898,17 +2133,17 @@
       typingTimeout = setTimeout(() => typeText(currentRoles), typeSpeed);
     }
 
-    // Intersection Observer for Animations - optimized
+    // Intersection Observer for Animations
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
+      rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // Stop observing once animated
+          observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
@@ -1926,32 +2161,46 @@
       applyLanguage(savedLang);
       
       // Initialize Lucide icons
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
       
       setTimeout(() => {
         loading.classList.add('hidden');
       }, 1000);
     });
 
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (e.altKey) {
-        switch(e.key) {
-          case 't':
-            e.preventDefault();
-            themeToggle.click();
-            break;
-          case 'e':
-            e.preventDefault();
-            langEn.click();
-            break;
-          case 'r':
-            e.preventDefault();
-            langRu.click();
-            break;
+    // Keyboard Shortcuts - only on desktop
+    if (!isMobile) {
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey) {
+          switch(e.key) {
+            case 't':
+              e.preventDefault();
+              themeToggle.click();
+              break;
+            case 'e':
+              e.preventDefault();
+              langEn.click();
+              break;
+            case 'r':
+              e.preventDefault();
+              langRu.click();
+              break;
+          }
         }
+      });
+    }
+
+    // Prevent zoom on double tap for iOS
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
       }
-    });
+      lastTouchEnd = now;
+    }, { passive: false });
   </script>
 </body>
 </html>
