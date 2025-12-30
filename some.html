@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jahongir Ahmadaliev - DevOps & Security Engineer">
+  <title>Jahongir Ahmadaliev - Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #2e3440;
+      --bg-alt: #3b4252;
+      --fg: #eceff4;
+      --accent: #88c0d0;
+      --accent-alt: #8fbcbb;
+      --green: #a3be8c;
+      --yellow: #ebcb8b;
+      --purple: #b48ead;
+      --border: 3px;
+      --shadow: 6px;
+    }
+
+    [data-theme="light"] {
+      --bg: #eceff4;
+      --bg-alt: #e5e9f0;
+      --fg: #2e3440;
+      --accent: #5e81ac;
+      --accent-alt: #81a1c1;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 1001;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 1.5rem;
+      background: var(--bg);
+      border-bottom: var(--border) solid var(--fg);
+      transform: translateY(0);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    header.hidden {
+      transform: translateY(-100%);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 0.4rem 0.9rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: var(--border) solid var(--fg);
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+      transition: all 0.15s ease;
+    }
+
+    .logo:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .logo:active {
+      transform: translate(var(--shadow), var(--shadow));
+      box-shadow: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      border: var(--border) solid var(--fg);
+      background: var(--bg-alt);
+    }
+
+    .nav-links li {
+      border-right: var(--border) solid var(--fg);
+    }
+
+    .nav-links li:last-child {
+      border-right: none;
+    }
+
+    .nav-links a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.6rem 1.2rem;
+      display: block;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .controls {
+      display: flex;
+      gap: 0;
+      border: var(--border) solid var(--fg);
+    }
+
+    .btn {
+      background: var(--bg-alt);
+      color: var(--fg);
+      border: none;
+      border-right: var(--border) solid var(--fg);
+      padding: 0.6rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .btn:last-child {
+      border-right: none;
+    }
+
+    .btn:hover {
+      background: var(--yellow);
+      color: var(--bg);
+    }
+
+    .btn.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7rem 1.5rem 3rem;
+      position: relative;
+    }
+
+    .hero-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.02;
+      background-image: 
+        repeating-linear-gradient(0deg, var(--fg) 0px, var(--fg) 1px, transparent 1px, transparent 30px),
+        repeating-linear-gradient(90deg, var(--fg) 0px, var(--fg) 1px, transparent 1px, transparent 30px);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 0.7rem;
+      margin-bottom: 1.2rem;
+      border: var(--border) solid var(--fg);
+      box-shadow: 5px 5px 0 var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -1.5px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--accent);
+      text-shadow: 3px 3px 0 var(--accent-alt);
+    }
+
+    .hero .subtitle {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--accent);
+      margin-left: 3px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      max-width: 650px;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      padding: 0.9rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border: var(--border) solid var(--fg);
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+    }
+
+    .btn-primary:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .btn-primary:active {
+      transform: translate(var(--shadow), var(--shadow));
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--bg);
+      color: var(--fg);
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+    }
+
+    .btn-secondary:hover {
+      background: var(--yellow);
+      color: var(--bg);
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .btn-secondary:active {
+      transform: translate(var(--shadow), var(--shadow));
+      box-shadow: none;
+    }
+
+    .avatar-section {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .avatar-container {
+      width: 150px;
+      height: 150px;
+      flex-shrink: 0;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border: var(--border) solid var(--fg);
+      box-shadow: 10px 10px 0 var(--accent);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .avatar:hover {
+      transform: translate(5px, 5px);
+      box-shadow: 5px 5px 0 var(--accent);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.15s ease;
+      box-shadow: 5px 5px 0 var(--fg);
+    }
+
+    .social-link:hover {
+      background: var(--purple);
+      color: var(--bg);
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .social-link:active {
+      transform: translate(5px, 5px);
+      box-shadow: none;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: var(--fg);
+      color: var(--bg);
+      border: var(--border) solid var(--fg);
+      box-shadow: 6px 6px 0 var(--accent);
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+    }
+
+    .skill-category:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .skill-category-header {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 1.2rem;
+      border-bottom: var(--border) solid var(--fg);
+    }
+
+    .skill-category h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .skill-list {
+      list-style: none;
+      padding: 1.2rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem;
+      border-bottom: 2px solid var(--fg);
+      transition: all 0.15s ease;
+    }
+
+    .skill-item:last-child {
+      border-bottom: none;
+    }
+
+    .skill-item:hover {
+      background: var(--bg);
+      padding-left: 1.2rem;
+    }
+
+    .skill-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .skill-level {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .skill-bar {
+      width: 25px;
+      height: 7px;
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      transition: all 0.15s ease;
+    }
+
+    .skill-bar.active {
+      background: var(--accent);
+    }
+
+    .skill-item:hover .skill-bar.active {
+      background: var(--yellow);
+    }
+
+    /* Timeline */
+    .timeline-item {
+      margin-bottom: 2rem;
+    }
+
+    .timeline-content {
+      background: var(--bg-alt);
+      padding: 1.5rem;
+      border: var(--border) solid var(--fg);
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+      transition: all 0.15s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      border: 2px solid var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .timeline-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+    }
+
+    .timeline-subtitle {
+      font-size: 1rem;
+      color: var(--purple);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .timeline-description {
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* Languages */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .language-card {
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow) var(--shadow) 0 var(--fg);
+    }
+
+    .language-card:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .language-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+    }
+
+    .language-level-tag {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 1rem;
+      border: var(--border) solid var(--fg);
+      margin: 0.8rem 0;
+    }
+
+    .language-description {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Preferences */
+    .preferences-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .preference-item {
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+      transition: all 0.15s ease;
+      box-shadow: 5px 5px 0 var(--fg);
+    }
+
+    .preference-item:hover {
+      background: var(--green);
+      color: var(--bg);
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .preference-text {
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Links */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .link-card {
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      padding: 1.2rem;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 5px 5px 0 var(--fg);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .link-card:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .link-icon {
+      width: 45px;
+      height: 45px;
+      background: var(--bg);
+      border: var(--border) solid var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    .link-card:hover .link-icon {
+      background: var(--fg);
+      color: var(--bg);
+    }
+
+    .link-arrow {
+      margin-left: auto;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-alt);
+      border-top: var(--border) solid var(--fg);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-text {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.4rem 0.8rem;
+      border: var(--border) solid var(--fg);
+      transition: all 0.15s ease;
+      box-shadow: 4px 4px 0 var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 0.8rem;
+    }
+
+    .footer-link:hover {
+      background: var(--purple);
+      color: var(--bg);
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--fg);
+    }
+
+    /* Scroll to Top */
+    .scroll-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: var(--bg);
+      border: var(--border) solid var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.15s ease;
+      z-index: 999;
+      font-size: 1.3rem;
+      font-weight: 700;
+      box-shadow: 5px 5px 0 var(--fg);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 var(--fg);
+    }
+
+    .scroll-top:active {
+      transform: translate(5px, 5px);
+      box-shadow: none;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: var(--bg-alt);
+      border: var(--border) solid var(--fg);
+      color: var(--fg);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      font-weight: 700;
+    }
+
+    /* Loading */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.4s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-box {
+      width: 50px;
+      height: 50px;
+      border: var(--border) solid var(--fg);
+      background: var(--accent);
+      animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero .subtitle {
+        font-size: 1.1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg-alt);
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: var(--border) solid var(--fg);
+        border-top: none;
+      }
+
+      .nav-links.active {
+        transform: translateX(0);
+      }
+
+      .nav-links li {
+        border-right: none;
+        border-bottom: var(--border) solid var(--fg);
+      }
+
+      .nav-links li:last-child {
+        border-bottom: none;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .btn {
+        border-right: none;
+        border-bottom: var(--border) solid var(--fg);
+      }
+
+      .btn:last-child {
+        border-bottom: none;
+      }
+
+      .avatar-section {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      section {
+        padding: 3rem 1rem;
+      }
+
+      .hero {
+        padding: 5rem 1rem 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .skills-grid,
+      .languages-grid,
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  </style>
+</head>
+<body>
+  <div class="loading"><div class="loading-box"></div></div>
+  <div class="progress-bar"></div>
+
+  <header>
+    <div class="header-content">
+      <a href="#" class="logo">JA</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">MENU</button>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" data-i18n="navAbout">About</a></li>
+          <li><a href="#skills" data-i18n="navSkills">Skills</a></li>
+          <li><a href="#education" data-i18n="navEducation">Education</a></li>
+          <li><a href="#languages" data-i18n="navLanguages">Languages</a></li>
+          <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="controls">
+        <button class="btn" id="themeToggle"><span id="themeText">LIGHT</span></button>
+        <button class="btn active" id="langEn">EN</button>
+        <button class="btn" id="langRu">RU</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="about">
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-tag" data-i18n="heroTag">DEVOPS & SECURITY</div>
+      <h1><span data-i18n="heroName">JAHONGIR</span><br><span class="highlight">AHMADALIEV</span></h1>
+      <div class="subtitle mono"><span id="typedText"></span><span class="typed-cursor"></span></div>
+      <p class="hero-description" data-i18n="heroDescription">
+        Passionate about cybersecurity, DevOps practices, and building reliable systems. 
+        Currently studying Information Security and constantly learning new technologies.
+      </p>
+      <div class="hero-buttons">
+        <a href="https://jahamars.github.io/" target="_blank" class="btn-primary" data-i18n="btnHomePage">HOME PAGE</a>
+        <a href="https://github.com/jahamars/" target="_blank" class="btn-secondary" data-i18n="btnGitHub">GITHUB</a>
+        <a href="https://t.me/gruvboxx" target="_blank" class="btn-secondary" data-i18n="btnTelegram">TELEGRAM</a>
+        <a href="https://jahamars.github.io/sert/" target="_blank" class="btn-secondary" data-i18n="btnAchievements">ACHIEVEMENTS</a>
+      </div>
+      <div class="avatar-section">
+        <div class="avatar-container">
+          <div class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/146427118?v=4" alt="Jahongir Ahmadaliev">
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/jahamars/" target="_blank" class="social-link">GH</a>
+          <a href="https://t.me/gruvboxx" target="_blank" class="social-link">TG</a>
+          <a href="mailto:jahamarsi@gmail.com" class="social-link">EM</a>
+          <a href="https://jmee.netlify.app" target="_blank" class="social-link">BL</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header">
+      <div class="section-number">01.</div>
+      <h2 class="section-title" data-i18n="sectionSkills">SKILLS</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-category-header">
+          <h3 data-i18n="skillsAdvanced">ADVANCED</h3>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span class="skill-name">Debian/Ubuntu</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Arch Linux</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Bash</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Git</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">GNU Tools</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header">
+          <h3 data-i18n="skillsIntermediate">INTERMEDIATE</h3>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span class="skill-name">Python</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Docker</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Ansible</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">PostgreSQL</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Nginx</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <div class="skill-category-header">
+          <h3 data-i18n="skillsBasic">BASIC</h3>
+        </div>
+        <ul class="skill-list">
+          <li class="skill-item">
+            <span class="skill-name">Terraform</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Kubernetes</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Grafana</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">GitLab CI</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Yandex-Cloud</span>
+            <div class="skill-level">
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar active"></span>
+              <span class="skill-bar"></span>
+              <span class="skill-bar"></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-header">
+      <div class="section-number">02.</div>
+      <h2 class="section-title" data-i18n="sectionEducation">EDUCATION</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-tag">2023 - 2027</div>
+          <h3 class="timeline-title" data-i18n="eduDegree">BACHELOR'S DEGREE</h3>
+          <div class="timeline-subtitle" data-i18n="eduUniversity">Tyumen State University</div>
+          <p class="timeline-description">
+            <span data-i18n="eduFaculty">Faculty of Mathematics and Computer Science</span><br>
+            <span data-i18n="eduProgram">Program: 10.03.01 Information Security</span><br>
+            <span data-i18n="eduSpecialization">Specialization: Computer Systems Security</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="section-header">
+      <div class="section-number">03.</div>
+      <h2 class="section-title" data-i18n="sectionLanguages">LANGUAGES</h2>
+    </div>
+    <div class="languages-grid">
+      <div class="language-card">
+        <h3 class="language-name" data-i18n="langEnglish">ENGLISH</h3>
+        <div class="language-level-tag">B2</div>
+        <div class="language-description" data-i18n="langEnglishLevel">UPPER INTERMEDIATE</div>
+      </div>
+      <div class="language-card">
+        <h3 class="language-name" data-i18n="langRussian">RUSSIAN</h3>
+        <div class="language-level-tag">C2</div>
+        <div class="language-description" data-i18n="langRussianLevel">FLUENT</div>
+      </div>
+      <div class="language-card">
+        <h3 class="language-name" data-i18n="langTajik">TAJIK</h3>
+        <div class="language-level-tag">C2</div>
+        <div class="language-description" data-i18n="langTajikLevel">NATIVE</div>
+      </div>
+      <div class="language-card">
+        <h3 class="language-name" data-i18n="langUzbek">UZBEK</h3>
+        <div class="language-level-tag">C2</div>
+        <div class="language-description" data-i18n="langUzbekLevel">NATIVE</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-number">04.</div>
+      <h2 class="section-title" data-i18n="sectionWorkPreferences">WORK PREFERENCES</h2>
+    </div>
+    <div class="preferences-grid">
+      <div class="preference-item"><div class="preference-text" data-i18n="prefPartTime">PART-TIME</div></div>
+      <div class="preference-item"><div class="preference-text" data-i18n="prefProjectBased">PROJECT-BASED</div></div>
+      <div class="preference-item"><div class="preference-text" data-i18n="prefInternships">INTERNSHIPS</div></div>
+      <div class="preference-item"><div class="preference-text" data-i18n="prefRemote">REMOTE WORK</div></div>
+      <div class="preference-item"><div class="preference-text" data-i18n="prefFlexible">FLEXIBLE</div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-header">
+      <div class="section-number">05.</div>
+      <h2 class="section-title" data-i18n="sectionContact">CONTACT</h2>
+    </div>
+    <div class="links-grid">
+      <a href="https://github.com/jahamars/" target="_blank" class="link-card">
+        <div class="link-icon">GH</div><div class="link-text">GITHUB</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://t.me/gruvboxx" target="_blank" class="link-card">
+        <div class="link-icon">TG</div><div class="link-text">TELEGRAM</div><div class="link-arrow">→</div>
+      </a>
+      <a href="mailto:jahamarsi@gmail.com" class="link-card">
+        <div class="link-icon">EM</div><div class="link-text">EMAIL</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://jmee.netlify.app" target="_blank" class="link-card">
+        <div class="link-icon">BL</div><div class="link-text" data-i18n="linkBlog">BLOG</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://openprofile.dev/profile/jahamars" target="_blank" class="link-card">
+        <div class="link-icon">LF</div><div class="link-text">LINUX FOUNDATION</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://www.credly.com/users/jahongir/" target="_blank" class="link-card">
+        <div class="link-icon">CR</div><div class="link-text">CREDLY</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://hub.docker.com/u/jahamars" target="_blank" class="link-card">
+        <div class="link-icon">DH</div><div class="link-text">DOCKER HUB</div><div class="link-arrow">→</div>
+      </a>
+      <a href="https://gitlab.com/jahamarsi1" target="_blank" class="link-card">
+        <div class="link-icon">GL</div><div class="link-text">GITLAB</div><div class="link-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-text" data-i18n="footerText">BUILT WITH PASSION</p>
+      <div class="footer-links">
+        <a href="https://github.com/jahamars/sert/tree/main/resume" target="_blank" class="footer-link" data-i18n="footerResume">RESUME</a>
+        <a href="https://jahamars.github.io/sert/" target="_blank" class="footer-link" data-i18n="footerAchievements">ACHIEVEMENTS</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scrollTop">↑</button>
+
+  <script>
+const t={en:{navAbout:"About",navSkills:"Skills",navEducation:"Education",navLanguages:"Languages",navContact:"Contact",heroTag:"DEVOPS & SECURITY",heroName:"JAHONGIR",heroDescription:"Passionate about cybersecurity, DevOps practices, and building reliable systems. Currently studying Information Security and constantly learning new technologies.",btnHomePage:"HOME PAGE",btnGitHub:"GITHUB",btnTelegram:"TELEGRAM",btnAchievements:"ACHIEVEMENTS",sectionSkills:"SKILLS",skillsAdvanced:"ADVANCED",skillsIntermediate:"INTERMEDIATE",skillsBasic:"BASIC",sectionEducation:"EDUCATION",eduDegree:"BACHELOR'S DEGREE",eduUniversity:"Tyumen State University",eduFaculty:"Faculty of Mathematics and Computer Science",eduProgram:"Program: 10.03.01 Information Security",eduSpecialization:"Specialization: Computer Systems Security",sectionLanguages:"LANGUAGES",langEnglish:"ENGLISH",langEnglishLevel:"UPPER INTERMEDIATE",langRussian:"RUSSIAN",langRussianLevel:"FLUENT",langTajik:"TAJIK",langTajikLevel:"NATIVE",langUzbek:"UZBEK",langUzbekLevel:"NATIVE",sectionWorkPreferences:"WORK PREFERENCES",prefPartTime:"PART-TIME",prefProjectBased:"PROJECT-BASED",prefInternships:"INTERNSHIPS",prefRemote:"REMOTE WORK",prefFlexible:"FLEXIBLE",sectionContact:"CONTACT",linkBlog:"BLOG",footerText:"BUILT WITH PASSION",footerResume:"RESUME",footerAchievements:"ACHIEVEMENTS"},ru:{navAbout:"Обо мне",navSkills:"Навыки",navEducation:"Образование",navLanguages:"Языки",navContact:"Контакты",heroTag:"DEVOPS И БЕЗОПАСНОСТЬ",heroName:"ДЖАХОНГИР",heroDescription:"Увлекаюсь кибербезопасностью, DevOps практиками и построением надежных систем. Изучаю информационную безопасность и постоянно осваиваю новые технологии.",btnHomePage:"ГЛАВНАЯ",btnGitHub:"GITHUB",btnTelegram:"TELEGRAM",btnAchievements:"ДОСТИЖЕНИЯ",sectionSkills:"НАВЫКИ",skillsAdvanced:"ПРОДВИНУТЫЙ",skillsIntermediate:"СРЕДНИЙ",skillsBasic:"БАЗОВЫЙ",sectionEducation:"ОБРАЗОВАНИЕ",eduDegree:"БАКАЛАВРИАТ",eduUniversity:"Тюменский государственный университет",eduFaculty:"Факультет математики и компьютерных наук",eduProgram:"Направление: 10.03.01 Информационная безопасность",eduSpecialization:"Специализация: Безопасность компьютерных систем",sectionLanguages:"ЯЗЫКИ",langEnglish:"АНГЛИЙСКИЙ",langEnglishLevel:"ВЫШЕ СРЕДНЕГО",langRussian:"РУССКИЙ",langRussianLevel:"СВОБОДНО",langTajik:"ТАДЖИКСКИЙ",langTajikLevel:"РОДНОЙ",langUzbek:"УЗБЕКСКИЙ",langUzbekLevel:"РОДНОЙ",sectionWorkPreferences:"ФОРМАТ РАБОТЫ",prefPartTime:"ЧАСТИЧНАЯ",prefProjectBased:"ПРОЕКТНАЯ",prefInternships:"СТАЖИРОВКИ",prefRemote:"УДАЛЕННО",prefFlexible:"ГИБКИЙ ГРАФИК",sectionContact:"КОНТАКТЫ",linkBlog:"БЛОГ",footerText:"СОЗДАНО С ЛЮБОВЬЮ",footerResume:"РЕЗЮМЕ",footerAchievements:"ДОСТИЖЕНИЯ"}};
+
+const pb=document.querySelector('.progress-bar'),hd=document.querySelector('header'),tt=document.getElementById('themeToggle'),tx=document.getElementById('themeText'),le=document.getElementById('langEn'),lr=document.getElementById('langRu'),st=document.getElementById('scrollTop'),ld=document.querySelector('.loading'),mb=document.getElementById('mobileMenuBtn'),nl=document.getElementById('navLinks'),ty=document.getElementById('typedText');
+
+let ls=0;
+
+window.addEventListener('scroll',()=>{
+const wh=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+pb.style.width=(window.scrollY/wh*100)+'%';
+st.classList.toggle('visible',window.scrollY>300);
+if(window.scrollY>ls&&window.scrollY>100)hd.classList.add('hidden');else hd.classList.remove('hidden');
+ls=window.scrollY;
+});
+
+st.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+const applyTheme=th=>{
+if(th==='light'){
+document.documentElement.setAttribute('data-theme','light');
+tx.textContent='DARK';
+}else{
+document.documentElement.removeAttribute('data-theme');
+tx.textContent='LIGHT';
+}
+localStorage.setItem('theme',th);
+};
+
+tt.addEventListener('click',()=>{
+const ct=document.documentElement.getAttribute('data-theme');
+applyTheme(ct==='light'?'dark':'light');
+});
+
+let to,ti=0,ci=0,ct='',id=false,cr=[];
+
+function typeText(r){
+cr=r;
+const c=cr[ti];
+if(id){
+ct=c.substring(0,ci-1);
+ci--;
+}else{
+ct=c.substring(0,ci+1);
+ci++;
+}
+ty.textContent=ct;
+let ts=id?50:100;
+if(!id&&ci===c.length){
+ts=2000;
+id=true;
+}else if(id&&ci===0){
+id=false;
+ti=(ti+1)%cr.length;
+ts=500;
+}
+to=setTimeout(()=>typeText(cr),ts);
+}
+
+const applyLang=l=>{
+le.classList.toggle('active',l==='en');
+lr.classList.toggle('active',l==='ru');
+document.documentElement.setAttribute('lang',l);
+document.querySelectorAll('[data-i18n]').forEach(e=>{
+const k=e.getAttribute('data-i18n');
+if(t[l][k])e.textContent=t[l][k];
+});
+localStorage.setItem('lang',l);
+if(to)clearTimeout(to);
+ti=0;ci=0;ct='';id=false;ty.textContent='';
+const r=l==='en'?['DEVOPS ENGINEER','SECURITY ENGINEER','SYSTEM ADMIN','CLOUD ENGINEER']:['DEVOPS ИНЖЕНЕР','ИНЖЕНЕР БЕЗОПАСНОСТИ','СИСТЕМНЫЙ АДМИН','ОБЛАЧНЫЙ ИНЖЕНЕР'];
+setTimeout(()=>typeText(r),300);
+};
+
+le.addEventListener('click',()=>applyLang('en'));
+lr.addEventListener('click',()=>applyLang('ru'));
+
+mb.addEventListener('click',()=>nl.classList.toggle('active'));
+nl.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>nl.classList.remove('active')));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',function(e){
+e.preventDefault();
+const tg=document.querySelector(this.getAttribute('href'));
+if(tg)window.scrollTo({top:tg.offsetTop-90,behavior:'smooth'});
+});
+});
+
+window.addEventListener('load',()=>{
+applyTheme(localStorage.getItem('theme')||'dark');
+applyLang(localStorage.getItem('lang')||'en');
+setTimeout(()=>ld.classList.add('hidden'),700);
+});
+
+document.addEventListener('keydown',e=>{
+if(e.altKey&&e.key==='t'){e.preventDefault();tt.click();}
+if(e.altKey&&e.key==='e'){e.preventDefault();le.click();}
+if(e.altKey&&e.key==='r'){e.preventDefault();lr.click();}
+});
+  </script>
+</body>
+</html>
